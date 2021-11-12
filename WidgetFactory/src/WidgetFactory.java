@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class WidgetFactory {
 
     /*
@@ -28,4 +30,63 @@ public class WidgetFactory {
      Profit: $760.00
 
      */
+
+
+
+    final static int WIDGETS_PER_HOUR = 10;
+    final static int NUM_SHIFTS = 2;
+    final static int SHIFT_HOURS = 8;
+    final static int NUMWORKERS = 5;
+    final static double WAGE = 16.50;
+    final static double WIDGET_PRICE = 10.00;
+    static int numWidgets = 0;
+
+    public static void main(String[] args){
+
+        input();
+        output();
+
+
+    }
+
+    public static void input(){
+
+        numWidgets = Integer.parseInt(JOptionPane.showInputDialog("How many widgets do you need?"));
+    }
+
+    public static int widgetsPerDay(){
+        return NUM_SHIFTS * SHIFT_HOURS * WIDGETS_PER_HOUR;
+    }
+
+    public static int numDays(){
+
+        return (int)Math.ceil(numWidgets/widgetsPerDay());
+
+    }
+
+    public static double cost(){
+
+        return numDays() * NUM_SHIFTS * SHIFT_HOURS * WAGE * NUMWORKERS;
+    }
+
+    public static double profit(){
+
+        return numWidgets * WIDGET_PRICE - cost();
+    }
+
+    public static void output(){
+
+        String message = "";
+
+        message += "Number of widgets: " + numWidgets;
+        message += "\nNumber of Days: " + numDays();
+        message+= "\nCost of Widgets: " + (numWidgets * WIDGET_PRICE);
+        message+= "\nCost of Production: " + cost();
+        message+= "\nProfit: " + profit();
+
+        JOptionPane.showMessageDialog(null, message);
+    }
+
 }
+
+
